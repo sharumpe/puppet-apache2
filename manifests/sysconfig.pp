@@ -6,15 +6,25 @@ class apache2::sysconfig
 {
 	include apache2::params
 
-        # Pick the template path we're going to use
-        $mod_path = get_module_path('apache2')
-        $specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$params::sysconfigPath.erb"
-        $default  = "$mod_path/templates/default$params::sysconfigPath.erb"
+	validate_string( $serverSignature )
+	validate_string( $serverTokens )
 
-	# Build the sysconfig file from the template
-	file { $params::sysconfigPath :
-		ensure	=> present,
-                content => inline_template( file( $specific, $default ) ),
-                notify	=> $apache2::serviceNotify,
+    # Pick the template path we're going to use
+    $mod_path = get_module_path('apache2')
+    $specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$params::sysconfigPath.erb"
+    $default  = "$mod_path/templates/default$params::sysconfigPath.erb"
+
+	# Replace lines in the existing file
+	file_line { 'serverSignatureRule' :
+		path	=> $params::sysconfigPath,
+		line	=> "APACHE_SERVERSIGNATURE = \"${serverSignature}\"",
+		match	=> "^APACHE_SERVERSIGNATURE\s*=",
+        notify	=> $apache2::serviceNotify,
+	}
+	file_line { 'serverTokensRule' :
+		path	=> $params::sysconfigPath,
+		line	=> "APACHE_SERVERTOKENS=\"${serverTokens}\"",
+		match	=> "^APACHE_SERVERTOKENS=",
+        notify	=> $apache2::serviceNotify,
 	}
 }
