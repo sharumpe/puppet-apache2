@@ -11,6 +11,7 @@ class apache2::params
 
 	$configConfdPath	= "${configDirPath}/conf.d"
 	$accessConfigPath	= "${configConfdPath}/access.conf"
+	$ldapConfigPath		= "${configConfdPath}/ldap.conf"
 	$remoteIpConfigPath	= "${configConfdPath}/remoteip.conf"
 	$traceEnableConfigPath	= "${configConfdPath}/trace.conf"
 
