@@ -36,9 +36,11 @@ define apache2::grantAccessToIp
 	validate_string( $location )
 	validate_string( $ip )
 
-	concat::fragment { "${location}_${ip}" :
-		target	=> $params::accessConfigPath,
-		order	=> 10,
-		content	=> template( "apache2/default${params::accessConfigPath}-grantToIp-frag.erb" ),
+	if ( is_ip_address( $ip ) ) {
+		concat::fragment { "${location}_${ip}" :
+			target	=> $params::accessConfigPath,
+			order	=> 10,
+			content	=> template( "apache2/default${params::accessConfigPath}-grantToIp-frag.erb" ),
+		}
 	}
 }
