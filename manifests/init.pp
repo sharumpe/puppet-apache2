@@ -6,13 +6,16 @@ File {
 
 class apache2
 (
-	$modules		= [],
+	$loadModules		= [],
+	$unloadModules		= [],
 	$useDefaultModules	= true,
 	$remoteIpHeader		= 'X-Forwarded-For',
 	$serverSignature	= 'off',
 	$serverTokens		= 'prod',
 	$traceEnable		= false,
-	$reloadOnChange		= false
+	$reloadOnChange		= false,
+	$serverInfoAccessIp	= undef,
+	$serverStatusAccessIp	= undef
 )
 {
 	#
@@ -58,6 +61,12 @@ class apache2
 
 
 	#
+	# Give the ability to add special access to locations
+	#
+	include apache2::access
+
+
+	#
 	# Set serverSignature and serverTokens
 	#
 	class { 'apache2::sysconfig' :
@@ -71,14 +80,17 @@ class apache2
 	# See params::a2modDefaults for default module list
 	# Other modules are turned on in their configuration definitions
 	#
-	if ( is_array( $modules ) ) { $a2modLoad = $modules }
+	if ( is_array( $loadModules ) ) { $a2modLoad = $loadModules }
 	else { $a2modLoad = [] }
+
+	if ( is_array( $unloadModules ) ) { $a2modUnload = $unloadModules }
+	else { $a2modUnload = [] }
 
 	if ( is_bool( $useDefaultModules ) and $useDefaultModules ) { $a2modDefaultLoad = $params::a2modDefaults }
 	else { $a2modDefaultLoad = [] }
 
-	class { 'apache2::defaultModules':
-		modules	=> union( $a2modLoad, $a2modDefaultLoad )
+	class { 'apache2::modules':
+		modules	=> difference( union( $a2modLoad, $a2modDefaultLoad ), $a2modUnload )
 	}
 
 
@@ -104,11 +116,9 @@ class apache2
 	#
 	# Defaults for server-info and server-status
 	#
-	include apache2::statusAndInfo
+	class { 'apache2::statusAndInfo' :
+		serverInfoAccessIp	=> $serverInfoAccessIp,
+		serverStatusAccessIp	=> $serverStatusAccessIp,
+	}
 
-
-	#
-	# Grant access to various things from TS network
-	#
-	include apache2::access
 }
