@@ -14,15 +14,18 @@ class apache2::statusAndInfo
 	apache2::enableModule{ 'info': }
 
 	# Simply put in the default server-status and server-info files,
-	# but using the new-style access control configurations
+	# but using the new-style access control configurations.
+	# This has to happen because old-style and new-style can't be
+	# combined for the same <Location>, and grantAccessToIp uses
+	# the new-style access control.
 	file { $params::statusConfigPath :
 		ensure	=> present,
-		source	=> "puppet:///modules/apache2${params::statusConfigPath}",
+		source	=> "puppet:///modules/apache2/default${params::statusConfigPath}",
 		require	=> Package[ $params::packageName ],
 	}
 	file { $params::infoConfigPath :
 		ensure	=> present,
-		source	=> "puppet:///modules/apache2${params::infoConfigPath}",
+		source	=> "puppet:///modules/apache2/default${params::infoConfigPath}",
 		require	=> Package[ $params::packageName ],
 	}
 
