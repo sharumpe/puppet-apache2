@@ -23,11 +23,11 @@ class apache2::modules
 
 define apache2::enableModule
 {
-        # Enable the module
-        exec { "enable_${name}" :
-                command => "/usr/sbin/a2enmod ${name}",
-                unless  => "/usr/sbin/a2enmod -q ${name}",
-                require => Package[ $params::packageName ],
-                notify	=> $apache2::serviceNotify,
-        }
+	# Enable the module
+	exec { "enable_${name}" :
+	    command => "/usr/sbin/a2enmod ${name}",
+	    unless  => "/usr/sbin/a2enmod -q ${name}",
+	    require => Package[ $params::packageName ],
+	    notify	=> $apache2::serviceNotify,
+	}
 }
