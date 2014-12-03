@@ -15,8 +15,10 @@ class apache2::params
 	$configConfdPath	= "${configDirPath}/conf.d"
 	$accessConfigPath	= "${configConfdPath}/access.conf"
 	$jkConfigPath		= "${configConfdPath}/jk.conf"
+	$jkAppsConfigPath	= "${configConfdPath}/jkApps.conf.inc"
 	$ldapConfigPath		= "${configConfdPath}/ldap.conf"
 	$phpConfigPath		= "${configConfdPath}/php5.conf"
+	$phpAppsConfigPath	= "${configConfdPath}/php5Apps.conf.inc"
 	$remoteIpConfigPath	= "${configConfdPath}/remoteip.conf"
 	$traceEnableConfigPath	= "${configConfdPath}/trace.conf"
 

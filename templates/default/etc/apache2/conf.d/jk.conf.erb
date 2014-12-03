@@ -40,5 +40,5 @@
 	# Set properties for the status worker
 	JkWorkerProperty	worker.status.type=status
 
-	Include /etc/apache2/conf.d/jk.d/*.mount
+	IncludeOptional /etc/apache2/conf.d/jkApps.conf.inc
 </IfModule>

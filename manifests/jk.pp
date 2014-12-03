@@ -2,7 +2,8 @@ class apache2::jk
 (
 	$jkLogLevel	= "error",
 	$jkWorkerHost	= "localhost",
-	$jkWorkerPort	= 8009
+	$jkWorkerPort	= 8009,
+	$apps		= []
 )
 {
 	include apache2::params
@@ -10,6 +11,7 @@ class apache2::jk
 	validate_string( $jkLogLevel )
 	validate_string( $jkWorkerHost )
 	validate_string( $jkWorkerPort )
+	validate_array( $apps )
 
 	# install the package
 	package { $params::jkPackageName :
@@ -27,11 +29,16 @@ class apache2::jk
 	$default  = "$mod_path/templates/default$params::jkConfigPath.erb"
 
 	# write the config file
-	file { $apache2::jkConfigPath :
+	file { $params::jkConfigPath :
 		ensure => file,
 		content => inline_template( file( $specific, $default ) ),
 		notify  => $apache2::serviceNotify,
 		require	=> Package[ $params::jkPackageName ],
 	}
 
+	# if any apps were specified, create them
+	class { 'apache2::jk::app' : }
+	if ( is_array( $apps ) and size( $apps ) > 0 ) {
+		apache2::jk::addApp{ $apps : }
+	}
 }
