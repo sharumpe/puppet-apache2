@@ -31,8 +31,8 @@ define apache2::jk::addApp
 
 	# Pick the template path we're going to use
 	$mod_path = get_module_path('apache2')
-	$specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$params::jkAppsConfigPath-app-fragment.erb"
-	$default  = "$mod_path/templates/default$params::jkAppsConfigPath-app-fragment.erb"
+	$specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$params::jkAppsConfigPath-app-frag.erb"
+	$default  = "$mod_path/templates/default$params::jkAppsConfigPath-app-frag.erb"
 
 	# write the config file
 	concat::fragment { $appName :
