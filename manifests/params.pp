@@ -3,6 +3,9 @@ class apache2::params
 	$serviceName   		= "apache2"
 	$packageName		= "apache2"
 
+	$jkPackageName		= "apache2-mod_jk"
+	$php5PackageName	= "apache2-mod_php5"
+
 	$sysconfigPath		= "/etc/sysconfig/apache2"
 
 	$configDirPath		= "/etc/apache2"
