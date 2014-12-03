@@ -1,9 +1,13 @@
 class apache2::access {
+	include apache2::params
+
 	#
 	# Create the file we're storing these in
 	#
 	concat { $params::accessConfigPath :
 		ensure	=> present,
+		notify  => $apache2::serviceNotify,
+		require	=> Package[ $params::jkPackageName ],
 	}
 }
 

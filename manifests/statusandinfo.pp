@@ -21,11 +21,13 @@ class apache2::statusAndInfo
 	file { $params::statusConfigPath :
 		ensure	=> present,
 		source	=> "puppet:///modules/apache2/default${params::statusConfigPath}",
+		notify  => $apache2::serviceNotify,
 		require	=> Package[ $params::packageName ],
 	}
 	file { $params::infoConfigPath :
 		ensure	=> present,
 		source	=> "puppet:///modules/apache2/default${params::infoConfigPath}",
+		notify  => $apache2::serviceNotify,
 		require	=> Package[ $params::packageName ],
 	}
 

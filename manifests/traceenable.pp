@@ -14,10 +14,12 @@ define apache2::traceenable
 	else {
 		$content = "TraceEnable off"
 	}
-	
+
 	file { $params::traceEnableConfigPath :
 		ensure	=> file,
 		content	=> $content,
+		notify  => $apache2::serviceNotify,
+		require	=> Package[ $params::packageName ],
 	}
 
 }

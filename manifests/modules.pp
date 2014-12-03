@@ -12,6 +12,8 @@ class apache2::modules
 		file_line { 'clear_module_list' :
 			path	=> $params::sysconfigPath,
 			line	=> 'APACHE_MODULES=""',
+			notify	=> $apache2::serviceNotify,
+			require	=> Package[ $params::packageName ],
 		}
 
 		# enable the modules specified
@@ -25,9 +27,9 @@ define apache2::enableModule
 {
 	# Enable the module
 	exec { "enable_${name}" :
-	    command => "/usr/sbin/a2enmod ${name}",
-	    unless  => "/usr/sbin/a2enmod -q ${name}",
-	    require => Package[ $params::packageName ],
-	    notify	=> $apache2::serviceNotify,
+		command => "/usr/sbin/a2enmod ${name}",
+		unless  => "/usr/sbin/a2enmod -q ${name}",
+		notify	=> $apache2::serviceNotify,
+		require	=> Package[ $params::packageName ],
 	}
 }

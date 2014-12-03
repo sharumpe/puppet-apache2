@@ -19,12 +19,14 @@ class apache2::sysconfig
 		path	=> $params::sysconfigPath,
 		line	=> "APACHE_SERVERSIGNATURE = \"${serverSignature}\"",
 		match	=> "^APACHE_SERVERSIGNATURE\s*=",
-        notify	=> $apache2::serviceNotify,
+        	notify	=> $apache2::serviceNotify,
+		require	=> Package[ $params::packageName ],
 	}
 	file_line { 'serverTokensRule' :
 		path	=> $params::sysconfigPath,
 		line	=> "APACHE_SERVERTOKENS=\"${serverTokens}\"",
 		match	=> "^APACHE_SERVERTOKENS=",
 		notify	=> $apache2::serviceNotify,
+		require	=> Package[ $params::packageName ],
 	}
 }
