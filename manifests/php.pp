@@ -4,7 +4,8 @@ class apache2::php
 	$phpErrorLog	= "/var/log/apache2/php-error_log",
 	$phpExposePhp	= "off",
 	$phpTimezone	= "America/Los_Angeles",
-	$appDirs	= []
+	$appDirs	= [],
+	$appLocs	= []
 )
 {
 	include apache2::params
@@ -15,6 +16,7 @@ class apache2::php
 	validate_re( $phpExposePhp, "^(on|off)" )
 	validate_string( $phpTimezone )
 	validate_array( $appDirs )
+	validate_array( $appLocs )
 
 	# install the package
 	package { $params::phpPackageName :
