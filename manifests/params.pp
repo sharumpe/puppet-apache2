@@ -4,7 +4,7 @@ class apache2::params
 	$packageName		= "apache2"
 
 	$jkPackageName		= "apache2-mod_jk"
-	$php5PackageName	= "apache2-mod_php5"
+	$phpPackageName		= "apache2-mod_php5"
 
 	$sysconfigPath		= "/etc/sysconfig/apache2"
 

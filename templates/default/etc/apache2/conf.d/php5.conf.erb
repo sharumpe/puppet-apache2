@@ -1,0 +1,18 @@
+<IfModule mod_php5.c>
+<% if @phpMemoryLimit -%>
+	# Set the memory limit
+	php_admin_value	memory_limit	<%= @phpMemoryLimit %>
+<% end -%>
+
+	# Don't tell folks we're using php
+	php_admin_value	expose_php	<%= @phpExposePhp %>
+
+	# Set the timezone
+	php_value	date.timezone	<%= @phpTimezone %>
+
+	# Where is the error_log?
+	php_value	error_log	<%= @phpErrorLog %>
+
+	# Include the application definition file.
+	IncludeOptional /etc/apache2/conf.d/php5Apps.conf.inc
+</IfModule>
