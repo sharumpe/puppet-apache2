@@ -1,0 +1,53 @@
+{
+  "name": "sharumpe-apache2",
+  "version": "0.1.0",
+  "source": "https://github.com/sharumpe/puppet-apache2",
+  "author": "sharumpe",
+  "license": "Apache License, Version 2.0",
+  "summary": "Module to manage Apache2 v2.4 in OpenSuSE 13.1",
+  "description": "This is focused on the needs that we have, specifically around Apache2 on OpenSuSE.  As such, it is not currently capable of managing every aspect of Apache2.",
+  "project_page": "https://github.com/sharumpe/puppet-apache2",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.3.2"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.1.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Modulefile": "51253e8f62db2e0e2dc596232944740e",
+    "README": "c1e8aff1a0f9125af9fbc83ad54c9a17",
+    "files/default/etc/apache2/mod_info.conf": "e2e0b2bcc27b9590b1761e45df424837",
+    "files/default/etc/apache2/mod_status.conf": "baa8df07b96aaa0e22d903c9b1c7aeb3",
+    "manifests/access.pp": "b4ec2a0b6d6003bf252e808f37174889",
+    "manifests/init.pp": "6f001c357fd0301d542a2913e3483347",
+    "manifests/jk/app.pp": "02087fc66cd01f9924e59622d64c3544",
+    "manifests/jk.pp": "3969be62310958378add658b337a464b",
+    "manifests/ldap.pp": "d6e383467cb256788fc69a2368ffbfd9",
+    "manifests/modules.pp": "94a24c9f235f419afdb5f9569192e292",
+    "manifests/params.pp": "b9def94039b2d1a52a5aa5d67827d4bc",
+    "manifests/php/app.pp": "253665e9ab0270f0c461aaaa47e277f6",
+    "manifests/php.pp": "3fb03a96e900bed6877c96583e1304ab",
+    "manifests/remoteip.pp": "d65ce6481269204de2414e1b5392e696",
+    "manifests/statusandinfo.pp": "bbb859b3423b297bfb91fb8e307c8261",
+    "manifests/sysconfig.pp": "93eda0ba722ffada648c46e13a867e01",
+    "manifests/traceenable.pp": "51610a730657be7246cb6c05b6417746",
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "templates/default/etc/apache2/conf.d/access.conf-grantToHost-frag.erb": "fbbce3f3cb6d2e3e5d6348c3e6b6bc48",
+    "templates/default/etc/apache2/conf.d/access.conf-grantToIp-frag.erb": "f91c8bb6a8eabd4bb5b3196ac680a9fa",
+    "templates/default/etc/apache2/conf.d/jk.conf.erb": "d99bd99d51c9b4bd725ea379972ebd85",
+    "templates/default/etc/apache2/conf.d/jkApps.conf.inc-app-frag.erb": "d0f0160574f55ec7b885889c206b3805",
+    "templates/default/etc/apache2/conf.d/ldap.conf.erb": "26e13756eee3e57e97179e055285c6ed",
+    "templates/default/etc/apache2/conf.d/php5.conf.erb": "f8ec2120a320f74bea705a3bd32e4cb7",
+    "templates/default/etc/apache2/conf.d/php5Apps.conf.inc-appDir-frag.erb": "ec8eb916889dd0db0a390eff4b407a66",
+    "templates/default/etc/apache2/conf.d/php5Apps.conf.inc-appLoc-frag.erb": "1f270c903d9deed5c03a40add0232c90",
+    "templates/default/etc/apache2/conf.d/remoteip.conf.erb": "c82e689c3185ac842bf75e34db8c0559",
+    "tests/init.pp": "bb5143bb494774c516ed95c3d81eb9f9"
+  }
+}

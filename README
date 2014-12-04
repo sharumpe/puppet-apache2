@@ -1,16 +1,111 @@
 apache2
 
-This is the apache2 module.
+This is focused on the needs that we have, specifically around Apache2 on OpenSuSE.
+As such, it is not currently capable of managing every aspect of Apache2.
+Please take a look at the .pp files to see default values for arguments.
 
-License
--------
+Basic usage looks like this:
+
+	#
+	# Set up a basic Apache2 installation.
+	#
+	# reloadOnChange (bool): if true, reload after config changes
+	# useDefaultModules (bool): if true, load standard set of modules
+	#	defined in params.pp
+	# (un)loadModules (array): module names to ensure are (un)loaded. This
+	#	works with the defaultModules, adding or removing and creating
+	#	a single final list of modules to enable.
+	# serverInfoAccessIp (ip): allow this ip to access /server-info (if the
+	#	info module is enabled)
+	# serverStatusAccessIp (ip): allow this ip to access /server-status (if
+	#	the status module is enabled)
+	#
+	# The AccessIp configs could also be done via apache2::grantAccessToIp
+	#
+	class { 'apache2':
+		reloadOnChange          => true,
+		useDefaultModules       => true,
+		loadModules             => [ 'desiredModule' ],
+		unloadModules           => [ 'undesiredModule' ],
+		serverInfoAccessIp      => '192.168.1.0/24',
+		serverStatusAccessIp    => '192.168.1.0/24',
+	}
+
+	#
+	# Set up the ldap module.
+	# This loads the ldap module and sets up /ldap-status. There is no need
+	# to add 'ldap' to the loadModules list above if you use this class.
+	#
+	# ldapStatusAccessIp (ip): allow this ip to access /ldap-status
+	#
+	class { 'apache2::ldap' :
+		ldapStatusAccessIp      => '192.168.1.0/24',
+	}
+
+	#
+	# Set up the jk module for use with Tomcat.
+	# This installs the apache2-mod_jk package and loads the jk module.
+	#
+	# jkLogLevel (string): sets the same param for JK
+	# jkWorkerHost (string): sets the same param for JK
+	# jkWorkerPort (string): sets the same param for JK
+	# apps (array): set up a jkMount for the specified locations.
+	#
+	class { 'apache2::jk' :
+		jkLogLevel	=> 'error',
+		jkWorkerHost	=> 'localhost',
+		jkWorkerPort	=> 8009,
+		apps		=> [ 'manager' ],
+	}
+
+	#
+	# You can also specify jkMount locations this way:
+	#
+	apache2::jk::addApp { 'host-manager' : }
+
+	#
+	# Add access to any location based on ip.  Can also add access based
+	# on host by using grantAccessToHost with a "host" argument.
+	# Note: this access control works for anything you can reference via
+	#       Apache's <Location> blocks.
+	#
+	apache2::grantAccessToIp { 'jk-manager-cts' :
+		location        => '/manager',
+		ip              => '192.168.1.0/24',
+	}
+	apache2::grantAccessToIp { 'jk-host-manager-cts' :
+		location        => '/host-manager',
+		ip              => '192.168.1.0/24',
+	}
+
+	#
+	# Turn on php5 (currently 5.4 in OpenSuSE 13.1)
+	# This installs the apache2-php5 module and loads the php5 module.
+	# Arguments specified in here override the defaults in php.ini, and
+	# that file is left un-touched.
+	# The apps "turn on" php for a specific <Location> or <Directory>. This
+	# allows us to limit php use to the places where it is needed.
+	#
+	# phpMemoryLimit (string): overrides the memory_limit
+	# phpErrorLog (string): location of the php-specific error log
+	# phpExposePhp (string): on/off -- don't let on that php is running
+	# phpTimezone (string): some things are angry if this isn't set
+	# appDirs (array): set up php for the specified <Directory>(s)
+	# appLocs (array): set up php for the specified <Location>(s)
+	#
+	class { 'apache2::php' :
+		phpMemoryLimit  => '96M',
+		appDirs         => [ '/srv/www/htdocs/phpapp' ],
+		appLocs         => [ '/phpapp2' ],
+	}
 
 
 Contact
 -------
+nospam@macwebb.com
 
 
 Support
 -------
 
-Please log tickets and issues at our [Projects site](http://projects.example.com)
+Please log tickets and issues at the GitHub site. (https://github.com/sharumpe/puppet-apache2)
