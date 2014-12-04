@@ -1,6 +1,6 @@
 class apache2::php
 (
-	$phpMemoryLimit,
+	$phpMemoryLimit = undef,
 	$phpErrorLog	= "/var/log/apache2/php-error_log",
 	$phpExposePhp	= "off",
 	$phpTimezone	= "America/Los_Angeles",
