@@ -24,4 +24,7 @@ class apache2::params
 
 	# Default modules for mod.pp
 	$a2modDefaults = [ 'actions','alias','auth_basic','authn_file','authz_host','authz_groupfile','authz_user','autoindex','dir','env','expires','include','log_config','mime','negotiation','setenvif','reqtimeout','authn_core','authz_core' ]
+
+	# Default packages for php5
+	$phpPackageDefaults = [ 'bz2','calendar','curl','gd','ldap','mbstring','mcrypt','mysql','openssl','pear','phar','zip' ]
 }
