@@ -8,6 +8,7 @@ class apache2
 (
 	$loadModules		= [],
 	$unloadModules		= [],
+	$extraPackages		= [],
 	$useDefaultModules	= true,
 	$remoteIpHeader		= 'X-Forwarded-For',
 	$serverSignature	= 'off',
@@ -24,10 +25,21 @@ class apache2
 	include apache2::params
 
 
+	validate_array( $loadModules )
+	validate_array( $unloadModules )
+	validate_array( $extraPackages )
+	validate_bool( $useDefaultModules )
+	validate_string( $remoteIpHeader )
+	validate_string( $serverSignature )
+	validate_string( $serverTokens )
+	validate_bool( $traceEnable )
+	validate_bool( $reloadOnChange )
+	validate_string( $serverInfoAccessIp )
+	validate_string( $serverStatusAccessIp )
+
 	#
 	# Figure out if we're doing any "ensure" stuff with the service
 	#
-	validate_bool( $reloadOnChange )
 	if ( $reloadOnChange ) {
 		$serviceNotify = Service[ $params::serviceName ]
 	}
@@ -47,6 +59,14 @@ class apache2
 		ensure	=> running,
 		enable	=> true,
 		require	=> Package[ $params::packageName ],
+	}
+
+
+	#
+	# Add whatever extra packages were asked for
+	#
+	if ( is_array( $extraPackages ) ) {
+		ensure_resource( 'package', $extraPackages, { ensure => latest } )
 	}
 
 
@@ -97,7 +117,6 @@ class apache2
 	#
 	# Turn TraceEnable off
 	#
-	validate_bool( $traceEnable )
 	apache2::traceenable { 'class_default' :
 		enable => $traceEnable,
 		require	=> Package[ $params::packageName ],
@@ -107,7 +126,6 @@ class apache2
 	#
 	# Turn on remoteIpHeader logging
 	#
-	validate_string( $remoteIpHeader )
 	apache2::remoteip { 'class_default' :
 		remoteIpHeader	=> $remoteIpHeader,
 	}
