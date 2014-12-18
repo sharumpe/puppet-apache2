@@ -1,5 +1,6 @@
 class apache2::php
 (
+	$phpVersion		= '5.4',
 	$phpMemoryLimit 	= undef,
 	$phpErrorLog		= "/var/log/apache2/php-error_log",
 	$phpExposePhp		= "off",
@@ -14,6 +15,7 @@ class apache2::php
 	include apache2::params
 
 	#validate_re( $phpMemoryLimit, "^[0..9]+[MmGg]" )
+	validate_re( $phpVersion, "^5.(4|5|6)$" )
 	validate_string( $phpMemoryLimit )
 	validate_string( $phpErrorLog )
 	validate_re( $phpExposePhp, "^(on|off)" )
@@ -24,10 +26,8 @@ class apache2::php
 	validate_array( $appDirs )
 	validate_array( $appLocs )
 
-	# install the package
-	package { $params::phpPackageName :
-		ensure	=> latest,
-	}
+	# If phpVersion is 5.5 or 5.6, enable the appropriate repo.
+	include apache2::php::reposelect
 
 	# include the module
 	apache2::enableModule{ 'php5':

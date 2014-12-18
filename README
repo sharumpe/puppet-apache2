@@ -86,6 +86,7 @@ Basic usage looks like this:
 	# The apps "turn on" php for a specific <Location> or <Directory>. This
 	# allows us to limit php use to the places where it is needed.
 	#
+	# phpVersion (string): one of [ '5.4', '5.5', '5.6' ] (default is 5.4)
 	# phpMemoryLimit (string): overrides the memory_limit
 	# phpErrorLog (string): location of the php-specific error log
 	# phpExposePhp (string): on/off -- don't let on that php is running
@@ -94,6 +95,7 @@ Basic usage looks like this:
 	# appLocs (array): set up php for the specified <Location>(s)
 	#
 	class { 'apache2::php' :
+		phpVersion	=> '5.4',
 		phpMemoryLimit  => '96M',
 		appDirs         => [ '/srv/www/htdocs/phpapp' ],
 		appLocs         => [ '/phpapp2' ],
