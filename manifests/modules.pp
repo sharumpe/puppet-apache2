@@ -12,6 +12,7 @@ class apache2::modules
 		file_line { 'clear_module_list' :
 			path	=> $params::sysconfigPath,
 			line	=> 'APACHE_MODULES=""',
+			match	=> '^APACHE_MODULES=',
 			notify	=> $apache2::serviceNotify,
 			require	=> Package[ $params::packageName ],
 		}
