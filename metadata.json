@@ -1,12 +1,19 @@
 {
   "name": "sharumpe-apache2",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "source": "https://github.com/sharumpe/puppet-apache2",
   "author": "sharumpe",
   "license": "Apache License, Version 2.0",
   "summary": "Module to manage Apache2 v2.4 in OpenSuSE 13.1",
   "description": "This is focused on the needs that we have, specifically around Apache2 on OpenSuSE.  As such, it is not currently capable of managing every aspect of Apache2.",
   "project_page": "https://github.com/sharumpe/puppet-apache2",
+  "issues_url": "https://github.com/sharumpe/puppet-apache2/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem":"OpenSuSE",
+      "operatingsystemrelease":["13.1"]
+    }
+  ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -21,8 +28,8 @@
 
   ],
   "checksums": {
-    "Modulefile": "51253e8f62db2e0e2dc596232944740e",
-    "README": "c1e8aff1a0f9125af9fbc83ad54c9a17",
+    "Modulefile": "61630800353e2c1ade5f2fff36dd9cf7",
+    "README": "ac89a4d453f168387cd44fef4512691d",
     "files/default/etc/apache2/mod_info.conf": "e2e0b2bcc27b9590b1761e45df424837",
     "files/default/etc/apache2/mod_status.conf": "baa8df07b96aaa0e22d903c9b1c7aeb3",
     "manifests/access.pp": "b4ec2a0b6d6003bf252e808f37174889",
@@ -30,11 +37,12 @@
     "manifests/jk/app.pp": "02087fc66cd01f9924e59622d64c3544",
     "manifests/jk.pp": "3969be62310958378add658b337a464b",
     "manifests/ldap.pp": "d6e383467cb256788fc69a2368ffbfd9",
-    "manifests/modules.pp": "94a24c9f235f419afdb5f9569192e292",
+    "manifests/modules.pp": "5ce4eeb5422039eca5983dd61dcda7bd",
     "manifests/params.pp": "5f2671dce552c726515b724f488b95df",
     "manifests/php/app.pp": "253665e9ab0270f0c461aaaa47e277f6",
     "manifests/php/package.pp": "2c74abd8121cd8ffa4e56c8a20864f6b",
-    "manifests/php.pp": "b9e755c0d86d1128214607d82dc7a813",
+    "manifests/php/reposelect.pp": "c5f6658161bdf3ba87a7fd37982fdea4",
+    "manifests/php.pp": "8832fd902a59a6cc72a74e8be7e9e9e6",
     "manifests/remoteip.pp": "d65ce6481269204de2414e1b5392e696",
     "manifests/statusandinfo.pp": "bbb859b3423b297bfb91fb8e307c8261",
     "manifests/sysconfig.pp": "93eda0ba722ffada648c46e13a867e01",

@@ -1,5 +1,5 @@
 name    'sharumpe-apache2'
-version '0.1.0'
+version '0.3.0'
 source 'https://github.com/sharumpe/puppet-apache2'
 author 'sharumpe'
 license 'Apache License, Version 2.0'
