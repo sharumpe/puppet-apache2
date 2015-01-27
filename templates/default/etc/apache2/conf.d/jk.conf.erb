@@ -33,9 +33,9 @@
 	JkWorkerProperty	worker.localJvm1.type=ajp13
 	JkWorkerProperty	worker.localJvm1.host=<%= @jkWorkerHost %>
 	JkWorkerProperty	worker.localJvm1.port=<%= @jkWorkerPort %>
-	JkWorkerProperty	worker.localJvm1.socket_timeout=10
-	JkWorkerProperty	worker.localJvm1.retries=3
-	JkWorkerProperty	worker.localJvm1.lbfactor=50
+	JkWorkerProperty	worker.localJvm1.socket_timeout=<%= @jkWorkerSocketTimeout %>
+	JkWorkerProperty	worker.localJvm1.retries=<%= @jkWorkerRetries %>
+	JkWorkerProperty	worker.localJvm1.lbfactor=1
 
 	# Set properties for the status worker
 	JkWorkerProperty	worker.status.type=status

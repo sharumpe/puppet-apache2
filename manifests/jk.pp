@@ -1,9 +1,11 @@
 class apache2::jk
 (
-	$jkLogLevel	= "error",
-	$jkWorkerHost	= "localhost",
-	$jkWorkerPort	= 8009,
-	$apps		= []
+	$jkLogLevel            = "error",
+	$jkWorkerHost          = "localhost",
+	$jkWorkerPort          = 8009,
+	$jkWorkerRetries       = 3,
+	$jkWorkerSocketTimeout = 60,
+	$apps                  = []
 )
 {
 	include apache2::params
@@ -11,6 +13,8 @@ class apache2::jk
 	validate_string( $jkLogLevel )
 	validate_string( $jkWorkerHost )
 	validate_string( $jkWorkerPort )
+	validate_string( $jkWorkerRetries )
+	validate_string( $jkWorkerSocketTimeout )
 	validate_array( $apps )
 
 	# install the package
