@@ -59,6 +59,7 @@ class apache2
 		ensure	=> running,
 		enable	=> true,
 		require	=> Package[ $params::packageName ],
+		provider => systemd,
 	}
 
 
