@@ -55,7 +55,6 @@ class apache2::php::reposelect
 	# install the package
 	package { $params::phpPackageName :
 		ensure	=> latest,
-		install_options	=> [ "--from ${repoAlias}" ],
 		require	=> [ Zypprepo[ 'opensuse-13.1-devel_languages_php55' ], Zypprepo[ 'opensuse-13.1-devel_languages_php56' ] ],
 	}
 
