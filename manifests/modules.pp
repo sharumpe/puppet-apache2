@@ -32,5 +32,6 @@ define apache2::enableModule
 		unless  => "/usr/sbin/a2enmod -q ${name}",
 		notify	=> $apache2::serviceNotify,
 		require	=> Package[ $params::packageName ],
+		before	=> Service[ $params::serviceName ],
 	}
 }
