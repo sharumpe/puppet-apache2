@@ -7,7 +7,6 @@ class apache2::access {
 	concat { $params::accessConfigPath :
 		ensure	=> present,
 		notify  => $apache2::serviceNotify,
-		require	=> Package[ $params::jkPackageName ],
 	}
 }
 
