@@ -10,13 +10,13 @@ class apache2::params
 
 	$configDirPath		= "/etc/apache2"
 	$infoConfigPath		= "${configDirPath}/mod_info.conf"
+	$ldapConfigPath		= "${configDirPath}/ldap.conf"
 	$statusConfigPath	= "${configDirPath}/mod_status.conf"
 
 	$configConfdPath	= "${configDirPath}/conf.d"
 	$accessConfigPath	= "${configConfdPath}/access.conf"
 	$jkConfigPath		= "${configConfdPath}/jk.conf"
 	$jkAppsConfigPath	= "${configConfdPath}/jkApps.conf.inc"
-	$ldapConfigPath		= "${configConfdPath}/ldap.conf"
 	$phpConfigPath		= "${configConfdPath}/php5.conf"
 	$phpAppsConfigPath	= "${configConfdPath}/php5Apps.conf.inc"
 	$remoteIpConfigPath	= "${configConfdPath}/remoteip.conf"
