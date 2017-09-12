@@ -17,13 +17,13 @@ class apache2::ldap
 
   # Simply put in the default ldap config file,
   # but using the new-style access control configurations
-  file { $params::ldapConfigPath :
+  file { $apache2::params::ldapConfigPath :
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     content => inline_template( file( $specific, $default ) ),
     notify  => $apache2::serviceNotify,
-    require => Package[ $params::packageName ],
+    require => Package[ $apache2::params::packageName ],
   }
 
   # Grant access to given IP

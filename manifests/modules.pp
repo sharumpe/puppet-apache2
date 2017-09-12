@@ -10,11 +10,11 @@ class apache2::modules
   if ( is_array( $modules ) and ( size( $modules ) > 0 ) ) {
     # clear the module list
     file_line { 'clear_module_list' :
-      path    => $params::sysconfigPath,
+      path    => $apache2::params::sysconfigPath,
       line    => 'APACHE_MODULES=""',
       match   => '^APACHE_MODULES=',
       notify  => $apache2::serviceNotify,
-      require => Package[ $params::packageName ],
+      require => Package[ $apache2::params::packageName ],
     }
 
     # enable the modules specified
@@ -31,7 +31,7 @@ define apache2::enablemodule
     command => "/usr/sbin/a2enmod ${name}",
     unless  => "/usr/sbin/a2enmod -q ${name}",
     notify  => $apache2::serviceNotify,
-    require => Package[ $params::packageName ],
-    before  => Service[ $params::serviceName ],
+    require => Package[ $apache2::params::packageName ],
+    before  => Service[ $apache2::params::serviceName ],
   }
 }

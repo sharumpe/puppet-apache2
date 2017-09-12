@@ -135,7 +135,7 @@ class apache2
   #
   # Defaults for server-info and server-status
   #
-  class { 'apache2::statusAndInfo' :
+  class { 'apache2::statusandinfo' :
     serverInfoAccessIp   => $serverInfoAccessIp,
     serverStatusAccessIp => $serverStatusAccessIp,
   }
