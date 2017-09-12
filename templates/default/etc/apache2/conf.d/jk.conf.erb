@@ -1,44 +1,44 @@
 <IfModule mod_jk.c>
-	# Where to put jk logs
-	JkLogFile /var/log/apache2/mod_jk_log
+  # Where to put jk logs
+  JkLogFile /var/log/apache2/mod_jk_log
 
-	# Set the jk log level [debug/error/info]
-	JkLogLevel <%= @jkLogLevel %>
+  # Set the jk log level [debug/error/info]
+  JkLogLevel <%= @jkLogLevel %>
 
-	# Select the log format
-	JkLogStampFormat "[%a %b %d %H:%M:%S %Y] "
+  # Select the log format
+  JkLogStampFormat "[%a %b %d %H:%M:%S %Y] "
 
-	# JkRequestLogFormat set the request format
-	JkRequestLogFormat "%w %V %T"
+  # JkRequestLogFormat set the request format
+  JkRequestLogFormat "%w %V %T"
 
-	# JKShmFile
-	JkShmFile /var/log/apache2/jk-runtime-status
+  # JKShmFile
+  JkShmFile /var/log/apache2/jk-runtime-status
 
-	# JkOptions indicate to send SSL KEY SIZE,
-	JkOptions +ForwardKeySize +ForwardURICompat -ForwardDirectories
+  # JkOptions indicate to send SSL KEY SIZE,
+  JkOptions +ForwardKeySize +ForwardURICompat -ForwardDirectories
 
-	# JkWorkerProperty lines instead of worker.properties file
+  # JkWorkerProperty lines instead of worker.properties file
 
-	# Define some properties
-	JkWorkerProperty	workers.apache_log=/var/log/apache2
-	JkWorkerProperty	workers.tomcat_home=/usr/share/tomcat
-	JkWorkerProperty	workers.java_home=/etc/alternatives/jre
-	JkWorkerProperty	ps=/
+  # Define some properties
+  JkWorkerProperty	workers.apache_log=/var/log/apache2
+  JkWorkerProperty	workers.tomcat_home=/usr/share/tomcat
+  JkWorkerProperty	workers.java_home=/etc/alternatives/jre
+  JkWorkerProperty	ps=/
 
-	# Define the loadbalancer worker
-	JkWorkerProperty	worker.list=localJvm1,status
-	JkWorkerProperty	worker.maintain=60
+  # Define the loadbalancer worker
+  JkWorkerProperty	worker.list=localJvm1,status
+  JkWorkerProperty	worker.maintain=60
 
-	# Set properties for localJvm1 (ajp13)
-	JkWorkerProperty	worker.localJvm1.type=ajp13
-	JkWorkerProperty	worker.localJvm1.host=<%= @jkWorkerHost %>
-	JkWorkerProperty	worker.localJvm1.port=<%= @jkWorkerPort %>
-	JkWorkerProperty	worker.localJvm1.socket_timeout=<%= @jkWorkerSocketTimeout %>
-	JkWorkerProperty	worker.localJvm1.retries=<%= @jkWorkerRetries %>
-	JkWorkerProperty	worker.localJvm1.lbfactor=1
+  # Set properties for localJvm1 (ajp13)
+  JkWorkerProperty	worker.localJvm1.type=ajp13
+  JkWorkerProperty	worker.localJvm1.host=<%= @jkWorkerHost %>
+  JkWorkerProperty	worker.localJvm1.port=<%= @jkWorkerPort %>
+  JkWorkerProperty	worker.localJvm1.socket_timeout=<%= @jkWorkerSocketTimeout %>
+  JkWorkerProperty	worker.localJvm1.retries=<%= @jkWorkerRetries %>
+  JkWorkerProperty	worker.localJvm1.lbfactor=1
 
-	# Set properties for the status worker
-	JkWorkerProperty	worker.status.type=status
+  # Set properties for the status worker
+  JkWorkerProperty	worker.status.type=status
 
-	IncludeOptional /etc/apache2/conf.d/jkApps.conf.inc
+  IncludeOptional /etc/apache2/conf.d/jkApps.conf.inc
 </IfModule>

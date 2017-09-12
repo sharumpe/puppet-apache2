@@ -1,9 +1,9 @@
 <IfModule mod_remoteip.c>
 
-	RemoteIPHeader	<%= @remoteIpHeader -%>
+  RemoteIPHeader	<%= @remoteIpHeader -%>
 
-	LogFormat "%a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\""	combined
-	LogFormat "%v %a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\""	vhost_combined
+  LogFormat "%a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\""	combined
+  LogFormat "%v %a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\""	vhost_combined
 
 </IfModule>
 

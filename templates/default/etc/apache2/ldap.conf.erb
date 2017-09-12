@@ -1,23 +1,23 @@
 <IfModule util_ldap.c>
-	# Enable the LDAP connection pool and shared
-	# memory cache. Enable the LDAP cache status
-	# handler. Requires that mod_ldap and mod_authnz_ldap
-	# be loaded. Change the "yourdomain.example.com" to
-	# match your domain.
+  # Enable the LDAP connection pool and shared
+  # memory cache. Enable the LDAP cache status
+  # handler. Requires that mod_ldap and mod_authnz_ldap
+  # be loaded. Change the "yourdomain.example.com" to
+  # match your domain.
 
-	LDAPSharedCacheSize 500000
-	LDAPCacheEntries 1024
-	LDAPCacheTTL 600
-	LDAPOpCacheEntries 1024
-	LDAPOpCacheTTL 600
+  LDAPSharedCacheSize 500000
+  LDAPCacheEntries 1024
+  LDAPCacheTTL 600
+  LDAPOpCacheEntries 1024
+  LDAPOpCacheTTL 600
 
-	# Enable SSL connections, and disable certificate validation.
-	LDAPTrustedMode         SSL
-	LDAPVerifyServerCert    Off
+  # Enable SSL connections, and disable certificate validation.
+  LDAPTrustedMode         SSL
+  LDAPVerifyServerCert    Off
 
-	<Location /ldap-status>
-		SetHandler	ldap-status
-		Require host localhost
-		Require ip 127.0.0.1
-	</Location>
+  <Location /ldap-status>
+    SetHandler	ldap-status
+    Require host localhost
+    Require ip 127.0.0.1
+  </Location>
 </IfModule>

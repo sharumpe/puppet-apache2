@@ -1,6 +1,6 @@
-	<Location "/<%= @appName -%>*">
-		# see conf.d/access.conf for other access controls
-		JkMount localJvm1
-		Require host localhost
-		Require ip 127.0.0.1
-	</Location>
+  <Location "/<%= @appName -%>*">
+    # see conf.d/access.conf for other access controls
+    JkMount localJvm1
+    Require host localhost
+    Require ip 127.0.0.1
+  </Location>
