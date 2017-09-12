@@ -1,4 +1,4 @@
-class apache2::statusainfo
+class apache2::statusandinfo
 (
   $serverInfoAccessIp = undef,
   $serverStatusAccessIp = undef
