@@ -2,9 +2,9 @@ class apache2::jk
 (
   $jkLogLevel            = 'error',
   $jkWorkerHost          = 'localhost',
-  $jkWorkerPort          = 8009,
-  $jkWorkerRetries       = 3,
-  $jkWorkerSocketTimeout = 60,
+  $jkWorkerPort          = '8009',
+  $jkWorkerRetries       = '3',
+  $jkWorkerSocketTimeout = '60',
   $apps                  = []
 )
 {
