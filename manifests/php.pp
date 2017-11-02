@@ -74,10 +74,10 @@ class apache2::php
   # if any apps were specified, create them
   class { 'apache2::php::app' : }
   if ( is_array( $appDirs ) and size( $appDirs ) > 0 ) {
-    apache2::php::addAppDir{ $appDirs : }
+    apache2::php::addappdir{ $appDirs : }
   }
   if ( is_array( $appLocs ) and size( $appLocs ) > 0 ) {
-    apache2::php::addAppLoc{ $appLocs : }
+    apache2::php::addapploc{ $appLocs : }
   }
 
 }

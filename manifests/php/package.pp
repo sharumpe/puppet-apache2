@@ -1,7 +1,7 @@
 define apache2::php::package
 (
-  $packageName	= $name,
-  $ensure		= latest
+  $packageName = $name,
+  $ensure      = latest
 )
 {
   include apache2::params
@@ -14,12 +14,12 @@ define apache2::php::package
     $fixedPackageName = $packageName
   }
   else {
-    $fixedPackageName = "php5-$packageName"
+    $fixedPackageName = "php5-${packageName}"
   }
 
   package { $fixedPackageName :
-    ensure	=> $ensure,
-    require	=> Package[ $apache2::params::phpPackageName ],
+    ensure  => $ensure,
+    require => Package[ $apache2::params::phpPackageName ],
   }
 
 }

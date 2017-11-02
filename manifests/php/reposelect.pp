@@ -38,24 +38,24 @@ class apache2::php::reposelect
   }
 
   zypprepo { 'opensuse-13.1-devel_languages_php55' :
-    baseurl         => 'http://download.opensuse.org/repositories/devel:/languages:/php:/php55/openSUSE_13.1/',
-    enabled         => $enabled55,
-    autorefresh     => $autorefresh55,
-    name            => 'opensuse-13.1-devel_languages_php_php55',
-    gpgcheck        => 0,
+    baseurl     => 'http://download.opensuse.org/repositories/devel:/languages:/php:/php55/openSUSE_13.1/',
+    enabled     => $enabled55,
+    autorefresh => $autorefresh55,
+    name        => 'opensuse-13.1-devel_languages_php_php55',
+    gpgcheck    => 0,
   }
   zypprepo { 'opensuse-13.1-devel_languages_php56' :
-    baseurl         => 'http://download.opensuse.org/repositories/devel:/languages:/php:/php56/openSUSE_13.1/',
-    enabled         => $enabled56,
-    autorefresh     => $autorefresh56,
-    name            => 'opensuse-13.1-devel_languages_php_php56',
-    gpgcheck        => 0,
+    baseurl     => 'http://download.opensuse.org/repositories/devel:/languages:/php:/php56/openSUSE_13.1/',
+    enabled     => $enabled56,
+    autorefresh => $autorefresh56,
+    name        => 'opensuse-13.1-devel_languages_php_php56',
+    gpgcheck    => 0,
   }
 
   # install the package
   package { $apache2::params::phpPackageName :
-    ensure	=> latest,
-    require	=> [ Zypprepo[ 'opensuse-13.1-devel_languages_php55' ], Zypprepo[ 'opensuse-13.1-devel_languages_php56' ] ],
+    ensure  => latest,
+    require => [ Zypprepo[ 'opensuse-13.1-devel_languages_php55' ], Zypprepo[ 'opensuse-13.1-devel_languages_php56' ] ],
   }
 
 }

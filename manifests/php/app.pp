@@ -1,26 +1,26 @@
 class apache2::php::app
 {
   concat { $apache2::params::phpAppsConfigPath :
-    ensure	=> present,
+    ensure  => present,
     notify  => $apache2::serviceNotify,
-    require	=> Package[ $apache2::params::phpPackageName ],
+    require => Package[ $apache2::params::phpPackageName ],
   }
 
 
-  concat::fragment { "$apache2::params::phpAppsConfigPath-fragment-pre" :
-    target	=> $apache2::params::phpAppsConfigPath,
-    order	=> 01,
-    content	=> "<IfModule mod_php5.c>\n",
+  concat::fragment { "${apache2::params::phpAppsConfigPatha}-fragment-pre" :
+    target  => $apache2::params::phpAppsConfigPath,
+    order   => 01,
+    content => "<IfModule mod_php5.c>\n",
   }
 
-  concat::fragment { "$apache2::params::phpAppsConfigPath-fragment-post" :
-    target	=> $apache2::params::phpAppsConfigPath,
-    order	=> 99,
-    content	=> "</IfModule>\n",
+  concat::fragment { "${apache2::params::phpAppsConfigPath}-fragment-post" :
+    target  => $apache2::params::phpAppsConfigPath,
+    order   => 99,
+    content => "</IfModule>\n",
   }
 }
 
-define apache2::php::addAppDir
+define apache2::php::addappdir
 (
   $appDir = $name
 )
@@ -31,19 +31,19 @@ define apache2::php::addAppDir
 
   # Pick the template path we're going to use
   $mod_path = get_module_path('apache2')
-  $specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$apache2::params::phpAppsConfigPath-appDir-frag.erb"
-  $default  = "$mod_path/templates/default$apache2::params::phpAppsConfigPath-appDir-frag.erb"
+  $specific = "${mod_path}/templates/${::operatingsystem}/${::operatingsystemrelease}${apache2::params::phpAppsConfigPath}-appDir-frag.erb"
+  $default  = "${mod_path}/templates/default${apache2::params::phpAppsConfigPath}-appDir-frag.erb"
 
   # write the config file
   concat::fragment { $appDir :
-    target	=> $apache2::params::phpAppsConfigPath,
-    order	=> 10,
+    target  => $apache2::params::phpAppsConfigPath,
+    order   => 10,
     content => inline_template( file( $specific, $default ) ),
   }
 
 }
 
-define apache2::php::addAppLoc
+define apache2::php::addapploc
 (
   $appLoc = $name
 )
@@ -54,13 +54,13 @@ define apache2::php::addAppLoc
 
   # Pick the template path we're going to use
   $mod_path = get_module_path('apache2')
-  $specific = "$mod_path/templates/$operatingsystem/$operatingsystemrelease$apache2::params::phpAppsConfigPath-appLoc-frag.erb"
-  $default  = "$mod_path/templates/default$apache2::params::phpAppsConfigPath-appLoc-frag.erb"
+  $specific = "${mod_path}/templates/${::operatingsystem}/${::operatingsystemrelease}${apache2::params::phpAppsConfigPath}-appLoc-frag.erb"
+  $default  = "${mod_path}/templates/default${apache2::params::phpAppsConfigPath}-appLoc-frag.erb"
 
   # write the config file
   concat::fragment { $appLoc :
-    target	=> $apache2::params::phpAppsConfigPath,
-    order	=> 10,
+    target  => $apache2::params::phpAppsConfigPath,
+    order   => 10,
     content => inline_template( file( $specific, $default ) ),
   }
 
